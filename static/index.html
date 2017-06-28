@@ -24,6 +24,20 @@
 			function broadCast(message) {
 				console.log(`broadcasr: ${message}`);
 			}
+
+			// interesting way to have pipe by default
+            if (window.addEventListener) {
+                window.addEventListener("message", onMessage, false);
+            }
+            else if (window.attachEvent) {
+                window.attachEvent("onmessage", onMessage, false);
+            }
+
+            function onMessage({ data: { func, message } }) {
+                if (typeof(window[func]) == "function") {
+                    window[func].call(null, message);
+                }
+            }
 		</script>
 
 			<iframe class="embed-responsive-item" src="./components/login.html"></iframe>						

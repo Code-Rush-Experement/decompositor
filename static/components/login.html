@@ -1,5 +1,13 @@
 <html>
  <body>
 	<h1> component - login </h1>
+
+    <script>
+        window.parent.postMessage({
+            'func': 'broadCast',
+            'message': 'Message from login'
+        }, "*");
+    </script>
+
  </body>
 </html>
