@@ -1,0 +1,13 @@
+body {
+	background-color: green;
+	color: white;
+}
+
+iframe {
+	display: inline-block;
+}
+
+.component {
+	border-style: dashed;
+	display: inline-block;
+}

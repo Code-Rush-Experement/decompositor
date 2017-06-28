@@ -1,0 +1,30 @@
+<html>
+ <body>
+	<h1> component - dashboard </h1>
+	<button>logout</button> 
+	
+	<script>
+		const array = [];
+		let counter = 0;
+		
+		setInterval(() => {
+		
+			if (array && Math.random() < 0.5) {
+				document.body.removeChild(array.shift());
+				return;
+			}
+			
+			const node = document.createElement("li");
+			node.innerHTML = `dashboard item ${counter++}`;
+			document.body.appendChild(node);
+			array.push(node);
+			
+
+			
+		}, 500);
+		
+		
+
+	</script>
+ </body>
+</html>
