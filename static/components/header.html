@@ -1,21 +1,25 @@
 <html>
  <body>
-	<h1> component - login </h1>
-
+	<h1> component - header</h1>
+	<h1 class="status"></h1>
+	
     <script>
         window.parent.postMessage({
             'func': 'broadCast',
             'message': 'Message from login'
         }, "*");
 		
-		function fireEvent() {
-			window.parent.postMessage('logged')
-		};
-		
 		window.addEventListener("message", function (event) {
-			alert(event.data);
+			const el = document.querySelector('.status');
+			switch (event.data) {
+				case 'logged':
+				case 'logged-out':
+					el.innerText = event.data;
+				break;
+				
+			}			
 		}, false);
     </script>
-	<button onclick="fireEvent();"> login </button>
+
  </body>
 </html>
