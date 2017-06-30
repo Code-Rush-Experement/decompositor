@@ -1,4 +1,9 @@
+<!DOCTYPE html>
 <html>
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>	
+	<script type="text/javascript" src="http://davidjbradshaw.com/iframe-resizer/js/iframeResizer.contentWindow.min.js"></script>
+</head>
  <body>
 	<h1> component - dashboard </h1>
 	<button onclick="fireEvent();">logout</button> 
@@ -7,25 +12,27 @@
 		const array = [];
 		let counter = 0;
 		
-		setInterval(() => {
-		
+		const addItem = () => {
 			if (array && Math.random() < 0.5) {
-				document.body.removeChild(array.shift());
+				const node = array.shift();
+				node && document.body.removeChild(node);
 				return;
 			}
 			
-			const node = document.createElement("li");
+			const node = document.createElement("div");
 			node.innerHTML = `dashboard item ${counter++}`;
 			document.body.appendChild(node);
 			array.push(node);
-			
-
-			
+		};
+		
+		setInterval(() => {
+			addItem();
 		}, 500);
 		
 		    
 		function fireEvent() {
 			window.parent.postMessage('logged-out', '*')
+			addItem();
 		};
 				
 

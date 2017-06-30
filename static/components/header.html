@@ -1,14 +1,10 @@
+<!DOCTYPE html>
 <html>
  <body>
 	<h1> component - header</h1>
 	<h1 class="status"></h1>
 	
     <script>
-        window.parent.postMessage({
-            'func': 'broadCast',
-            'message': 'Message from login'
-        }, "*");
-		
 		window.addEventListener("message", function (event) {
 			const el = document.querySelector('.status');
 			switch (event.data) {
