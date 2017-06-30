@@ -21,10 +21,6 @@
 		<h1> body of the main container </h1>
 		
 		<script>			
-			function broadCast(message) {
-				console.log(`broadcasr: ${message}`);
-			}
-
 			// interesting way to have pipe by default
             if (window.addEventListener) {
                 window.addEventListener("message", onMessage, false);
@@ -33,19 +29,21 @@
                 window.attachEvent("onmessage", onMessage, false);
             }
 
-            function onMessage({ data: { func, message } }) {
-                if (typeof(window[func]) == "function") {
-                    window[func].call(null, message);
-                }
+            function onMessage({ data }) {
+				console.log(data);
+			
+                document.querySelectorAll('.component').forEach((component) => {
+					component.contentWindow.postMessage(data, '*');
+				});
             }
 		</script>
 		
-			<iframe class="embed-responsive-item" src="./components/header.html"></iframe>	
+			<iframe class="component" src="./components/header.html"></iframe>	
 			<hr />
 
-			<iframe class="embed-responsive-item" src="./components/login.html"></iframe>						
+			<iframe class="component" src="./components/login.html"></iframe>						
 
-			<iframe class="embed-responsive-item" src="./components/dashboard.html"></iframe>						
+			<iframe class="component" src="./components/dashboard.html"></iframe>						
 
   </body>  
 </html>

@@ -1,7 +1,7 @@
 <html>
  <body>
 	<h1> component - dashboard </h1>
-	<button>logout</button> 
+	<button onclick="fireEvent();">logout</button> 
 	
 	<script>
 		const array = [];
@@ -23,7 +23,11 @@
 			
 		}, 500);
 		
-		
+		    
+		function fireEvent() {
+			window.parent.postMessage('logged-out', '*')
+		};
+				
 
 	</script>
  </body>

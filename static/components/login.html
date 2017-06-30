@@ -3,18 +3,10 @@
 	<h1> component - login </h1>
 
     <script>
-        window.parent.postMessage({
-            'func': 'broadCast',
-            'message': 'Message from login'
-        }, "*");
-		
 		function fireEvent() {
-			window.parent.postMessage('logged')
+			window.parent.postMessage('logged', '*')
 		};
 		
-		window.addEventListener("message", function (event) {
-			alert(event.data);
-		}, false);
     </script>
 	<button onclick="fireEvent();"> login </button>
  </body>
