@@ -5,7 +5,7 @@
 	<link rel="stylesheet" href="index.css">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	
+
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script type="text/javascript" src="http://davidjbradshaw.com/iframe-resizer/js/iframeResizer.min.js"></script>
 	<script type="text/javascript" src="https://raw.githubusercontent.com/davidjbradshaw/iframe-resizer/master/js/iframeResizer.contentWindow.min.js"></script>
@@ -29,21 +29,24 @@
                 document.querySelectorAll('.component').forEach((component) => {
 					component.contentWindow.postMessage(data, '*');
 				});
+
+				router.onMessage(data);
+
+
+				layout.onMessage(data);
             }
 			
 			
 		</script>
 		
-			<iframe class="component" src="./components/header.html"></iframe>	
-			<hr />
-			
-			<iframe class="component" src="./components/login.html"></iframe>						
-			
-			<iframe class="component dashboard" src="./components/dashboard.html"></iframe>						
+		<div class="scene"></div>					
 
 			
 		<script>
-			iFrameResize({log:true});
+			iFrameResize({log:false});
 		</script>
+
+		<script src="./core/layout.js"></script>
+		<script src="./core/router.js"></script>
   </body>  
 </html>

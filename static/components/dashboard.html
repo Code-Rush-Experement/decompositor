@@ -7,27 +7,17 @@
  <body>
 	<h1> component - dashboard </h1>
 	<button onclick="fireEvent();">logout</button> 
-	
+	<button onclick="addItem();">add item</button> 
 	<script>
 		const array = [];
 		let counter = 0;
 		
 		const addItem = () => {
-			if (array && Math.random() < 0.5) {
-				const node = array.shift();
-				node && document.body.removeChild(node);
-				return;
-			}
-			
 			const node = document.createElement("div");
 			node.innerHTML = `dashboard item ${counter++}`;
 			document.body.appendChild(node);
 			array.push(node);
 		};
-		
-		setInterval(() => {
-			addItem();
-		}, 500);
 		
 		    
 		function fireEvent() {
