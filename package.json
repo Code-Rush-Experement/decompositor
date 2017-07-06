@@ -1,0 +1,27 @@
+{
+  "name": "decompositor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Code-Rush-Experement/decompositor.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Code-Rush-Experement/decompositor/issues"
+  },
+  "homepage": "https://github.com/Code-Rush-Experement/decompositor#readme",
+  "devDependencies": {
+    "express": "^4.15.3",
+    "serve-static": "^1.12.3",
+    "webpack": "^3.0.0",
+    "webpack-dev-middleware": "^1.11.0"
+  }
+}

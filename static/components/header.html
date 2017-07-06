@@ -3,18 +3,26 @@
  <body>
 	<h1> component - header</h1>
 	<h1 class="status"></h1>
+	<div class="user-info"></div>
 	
     <script>
+		
+		function logout() {
+			window.parent.postMessage('logged-out', '*');
+		}
+
 		window.addEventListener("message", function (event) {
 			const el = document.querySelector('.status');
 			switch (event.data) {
 				case 'logged':
+					document.querySelector('.user-info').innerHTML = `<img src="${userLogoUrl}"/> <button onclick="logout()">logout</button>`;
 				case 'logged-out':
 					el.innerText = event.data;
-				break;
-				
+				break;				
 			}			
 		}, false);
+
+		var userLogoUrl = `https://cdn0.iconfinder.com/data/icons/fatcow/32x32/user_red.png`;
     </script>
 
  </body>

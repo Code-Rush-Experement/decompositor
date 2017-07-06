@@ -5,7 +5,7 @@ router.onMessage = (msg) => {
 
     switch (msg) {
         case 'logged':
-            handleLocalNavigation(loginPath);
+            handleLocalNavigation(dashboardPath);
         break;
         case 'logged-out':
             handleLocalNavigation(loginPath);
