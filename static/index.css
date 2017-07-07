@@ -18,5 +18,6 @@ iframe {
 
 .component {
 	border-style: dashed;
+	width:100%;
 	display: inline-block;
 }

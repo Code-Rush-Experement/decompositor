@@ -15,9 +15,12 @@
 			const el = document.querySelector('.status');
 			switch (event.data) {
 				case 'logged':
+					el.innerText = '';
 					document.querySelector('.user-info').innerHTML = `<img src="${userLogoUrl}"/> <button onclick="logout()">logout</button>`;
+				break;
 				case 'logged-out':
 					el.innerText = event.data;
+					document.querySelector('.user-info').innerHTML = '';
 				break;				
 			}			
 		}, false);

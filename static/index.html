@@ -30,10 +30,6 @@
 					component.contentWindow.postMessage(data, '*');
 				});
 
-				router.onMessage(data);
-
-
-				layout.onMessage(data);
             }
 
 			function dispatchMessage(event) {
@@ -44,14 +40,11 @@
 		</script>
 		
 		<div class="scene"></div>					
-
+		<div class="content"></div>
 			
 		<script>
 			iFrameResize({log:false});
 		</script>
-
-		<script src="./core/layout.js"></script>
-		<script src="./core/router.js"></script>
 
 		<script src="./bundle.js"></script>
   </body>  
