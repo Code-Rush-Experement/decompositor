@@ -37,7 +37,7 @@
             }
 
 			function dispatchMessage(event) {
-				onMessage(event);
+				onMessage({ data: event });
 			};
 			
 			
@@ -50,7 +50,10 @@
 			iFrameResize({log:false});
 		</script>
 
+		<script src="./config/appConfig.js"></script>
 		<script src="./core/layout.js"></script>
 		<script src="./core/router.js"></script>
+		<script src="./index.js"></script>
+
   </body>  
 </html>

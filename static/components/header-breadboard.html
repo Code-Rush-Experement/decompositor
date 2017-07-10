@@ -3,8 +3,8 @@
 	<h1> breadoard for components </h1>
 
     <script>		
-		function fireMessage(msg) {
-			document.querySelector('.component').contentWindow.postMessage(msg, '*');
+		function fireMessage(message) {
+			document.querySelector('.component').contentWindow.postMessage({ message }, '*');
 		}
     </script>
 	<button onclick="fireMessage('logged-out')">fire `logged-out`</button>	
