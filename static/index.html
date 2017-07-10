@@ -30,9 +30,8 @@
 					component.contentWindow.postMessage(data, '*');
 				});
 
+                registry.onMessage(data);
 				router.onMessage(data);
-
-
 				layout.onMessage(data);
             }
 
@@ -51,6 +50,7 @@
 		</script>
 
 		<script src="./config/appConfig.js"></script>
+		<script src="./core/registry.js"></script>
 		<script src="./core/layout.js"></script>
 		<script src="./core/router.js"></script>
 		<script src="./index.js"></script>

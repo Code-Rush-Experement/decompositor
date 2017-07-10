@@ -7,10 +7,10 @@ router.onMessage = (msg) => {
     const { message = msg, route = {} } = msg;
 
     switch (message) {
-        case 'logged':
+        case 'router/logged':
             handleLocalNavigation(router.routePaths.login);
             break;
-        case 'logged-out':
+        case 'router/logged-out':
             handleLocalNavigation(router.routePaths.login);
             break;
         case 'router/register':

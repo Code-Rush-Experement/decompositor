@@ -1,10 +1,10 @@
 const registry = {
-    components: []
+    components: {}
 };
 
 const defaultComponent = `registry default scene <button onclick={dispatchMessage("scene/login")}>login</button>`;
 
-const registerComponent = component => registry.components.push(component);
+const registerComponent = wrappedCmp => registry.components[wrappedCmp.id] = wrappedCmp.component;
 
 registry.onMessage = ({ message, component = {} }) => {
     switch (message) {
@@ -15,4 +15,4 @@ registry.onMessage = ({ message, component = {} }) => {
     }
 };
 
-registry.getComponent = id => registry.components.find(c => c.id === id) || defaultComponent;
+registry.getComponent = id => registry.components[id] || defaultComponent;

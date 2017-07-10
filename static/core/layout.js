@@ -2,8 +2,8 @@ const layout = {};
 
 {
     layout.changeScene = (name) => {
-        console.log("change scene" , name);
-        document.querySelector(`.scene`).innerHTML = registry.getComponent(name);
+        const component = registry.getComponent(name);
+        document.querySelector(`.scene`).innerHTML = component;
     };
 
     layout.onMessage = (msg) => {

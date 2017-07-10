@@ -8,8 +8,8 @@
 		window.addEventListener("message", function (event) {
 			const el = document.querySelector('.status');
 			switch (event.data) {
-				case 'logged':
-				case 'logged-out':
+				case 'router/logged':
+				case 'router/logged-out':
 					el.innerText = event.data;
 				break;
 				
