@@ -1,17 +1,25 @@
-var router = {};
+const router = {
+    routePaths: {},
+};
 
 router.onMessage = (msg) => {
     console.log(msg);
+    const { message = msg, route = {} } = msg;
 
-    switch (msg) {
+    switch (message) {
         case 'logged':
-            handleLocalNavigation(loginPath);
-        break;
+            handleLocalNavigation(router.routePaths.login);
+            break;
         case 'logged-out':
-            handleLocalNavigation(loginPath);
-        break;
+            handleLocalNavigation(router.routePaths.login);
+            break;
+        case 'router/register':
+            registerRoute(route);
+            break;
     }
 }
+
+const registerRoute = route => router.routePaths[route.primaryPath] = route;
 
 const handleLocalNavigation = (path) => {
     window.location.hash = path.primaryPath;
@@ -30,18 +38,6 @@ window.addEventListener('popstate', function (e) {
     route(window.location.href);
 });
 
-const homePath = {scene:'home', primaryPath:'home', onActivate: routeToHome};
-const dashboardPath = {scene:'dashboard', primaryPath:'dashboard', onActivate: routeToDashboard};
-const loginPath = {scene:'login', primaryPath:'login'};
-
-const routePaths = {
-    '': homePath,
-    [homePath.primaryPath]: homePath,
-    [loginPath.primaryPath]: loginPath,
-    [dashboardPath.primaryPath]: dashboardPath,
-    'notMatch': homePath
-};
-
 function trimLocationToRelative(path) {
     return path.split('#')[1] || '';
 }
@@ -58,7 +54,7 @@ function routeHref(e) {
 function route(path) {
     let localPath = trimLocationToRelative(path);
     console.log(`localPath`, localPath);
-    const routePath = routePaths[localPath] || routePaths['notMatch'];
+    const routePath = router.routePaths[localPath] || router.routePaths['notMatch'];
     if (!routePath) {
         console.warn(`route is not found for path ${path} - ${localPath}`);
         return;
@@ -70,15 +66,6 @@ function route(path) {
     routePath.onActivate && routePath.onActivate();
     onMessage({ data: `scene/${routePath.scene}`});
 }
-
-function routeToDashboard(e) {
-    console.log("route to dashboard");
-}
-
-function routeToHome(e) {
-    console.log("route to home");
-}
-
 
 function initiate() {
     route(window.location.href);
