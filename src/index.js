@@ -1,21 +1,6 @@
 import layout from './core/layout.js';
 import router from './core/router.js';
-
-const internalComponents = [];
-
-const dispatch = (data) => {
-    document.querySelectorAll('.component').forEach((component) => {
-        component.contentWindow.postMessage(data, '*');
-    });
-    internalComponents.forEach( _ => _(data))
-};
-
-const addListener = (binder) => {
-    const handler = binder(dispatch);
-    internalComponents.push(handler);
-    window.addEventListener("message", ({ data }) => handler(data), false)
-}
-
+import { addListener } from './core/event-bus.js';
 
 addListener(layout);
 addListener(router);

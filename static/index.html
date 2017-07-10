@@ -14,37 +14,7 @@
   <body>
 		<h1> body of the main container </h1>
 		
-		<script>			
-			// interesting way to have pipe by default
-            if (window.addEventListener) {
-                window.addEventListener("message", onMessage, false);
-            }
-            else if (window.attachEvent) {
-                window.attachEvent("onmessage", onMessage, false);
-            }
-
-            function onMessage({ data }) {
-				console.log(data);
-			
-                document.querySelectorAll('.component').forEach((component) => {
-					component.contentWindow.postMessage(data, '*');
-				});
-
-            }
-
-			function dispatchMessage(event) {
-				onMessage(event);
-			};
-			
-			
-		</script>
-		
-		<div class="scene"></div>					
-		<div class="content"></div>
-			
-		<script>
-			iFrameResize({log:false});
-		</script>
+		<div class="scene"></div>								
 
 		<script src="./bundle.js"></script>
   </body>  
