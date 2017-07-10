@@ -1,25 +1,9 @@
-var layout = {};
+const layout = {};
 
 {
-    const layout_template = {
-        'default': `
-                default	scene <button onclick="layout.changeScene('login')">login</button>
-        `,
-        'dashboard':`
-                <iframe class="component" src="./components/header.html"></iframe>	
-                <hr />											
-                <iframe class="component dashboard" src="./components/dashboard.html"></iframe>	
-        `,
-        'login':`
-                <iframe class="component" src="./components/header.html"></iframe>	
-                <hr />											
-                <iframe class="component" src="./components/login.html"></iframe>	
-        `,    
-    };
-
     layout.changeScene = (name) => {
         console.log("change scene" , name);
-        document.querySelector(`.scene`).innerHTML = layout_template[name];
+        document.querySelector(`.scene`).innerHTML = registry.getComponent(name);
     };
 
     layout.onMessage = (msg) => {
@@ -28,10 +12,13 @@ var layout = {};
         switch (msg) {
             case `scene/dashboard`:
                 layout.changeScene(`dashboard`);
-            break;
+                break;
             case `scene/login`:
                 layout.changeScene(`login`);
-            break;
+                break;
+            default:
+                layout.changeScene(`default`);
+                break;
         }
     }
 ;
