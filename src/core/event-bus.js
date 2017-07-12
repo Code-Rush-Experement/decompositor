@@ -8,7 +8,7 @@ function dispatchToExternal(data) {
 			
 const internalComponents = [];
 
-const dispatch = (data) => {
+export const dispatch = (data) => {
     dispatchToExternal(data);
     dispatchToInternal(data);
 };

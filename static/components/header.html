@@ -8,17 +8,17 @@
     <script>
 		
 		function logout() {
-			window.parent.postMessage('logged-out', '*');
+			window.parent.postMessage('router/logged-out', '*');
 		}
 
 		window.addEventListener("message", function (event) {
 			const el = document.querySelector('.status');
 			switch (event.data) {
-				case 'logged':
+				case 'router/logged':
 					el.innerText = '';
 					document.querySelector('.user-info').innerHTML = `<img src="${userLogoUrl}"/> <button onclick="logout()">logout</button>`;
 				break;
-				case 'logged-out':
+				case 'router/logged-out':
 					el.innerText = event.data;
 					document.querySelector('.user-info').innerHTML = '';
 				break;				

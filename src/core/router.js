@@ -1,19 +1,26 @@
 const listen = (dispatch) => {
-    var router = {};
+    const router = {
+        routePaths: {},
+    };
 
     const onMessage = (msg) => {
         console.log('router', msg);
+        const { message = msg, route = {} } = msg;
 
-        switch (msg) {
-            case 'logged':
-                handleLocalNavigation(dashboardPath);
-            break;
-            case 'logged-out':
-                handleLocalNavigation(loginPath);
-            break;
+        switch (message) {
+            case 'router/logged':
+                handleLocalNavigation(router.routePaths.dashboard);
+                break;
+            case 'router/logged-out':
+                handleLocalNavigation(router.routePaths.login);
+                break;
+            case 'router/register':
+                registerRoute(route);
+                break;
         }
     };
 
+    const registerRoute = route => router.routePaths[route.primaryPath] = route;
 
     const handleLocalNavigation = (path) => {
         window.location.hash = path.primaryPath;
@@ -31,18 +38,6 @@ const listen = (dispatch) => {
         route(window.location.href);
     });
 
-    const homePath = {scene:'home', primaryPath:'home', onActivate: routeToHome};
-    const dashboardPath = {scene:'dashboard', primaryPath:'dashboard', onActivate: routeToDashboard};
-    const loginPath = {scene:'login', primaryPath:'login'};
-
-    const routePaths = {
-        '': homePath,
-        [homePath.primaryPath]: homePath,
-        [loginPath.primaryPath]: loginPath,
-        [dashboardPath.primaryPath]: dashboardPath,
-        'notMatch': homePath
-    };
-
     function trimLocationToRelative(path) {
         return path.split('#')[1] || '';
     }
@@ -59,7 +54,8 @@ const listen = (dispatch) => {
     function route(path) {
         let localPath = trimLocationToRelative(path);
         console.log(`localPath`, localPath);
-        const routePath = routePaths[localPath] || routePaths['notMatch'];
+        const routePath = router.routePaths[localPath] || router.routePaths['notMatch'];
+
         if (!routePath) {
             console.warn(`route is not found for path ${path} - ${localPath}`);
             return;
@@ -69,14 +65,6 @@ const listen = (dispatch) => {
         console.log('route to history ' , historyPath);
         routePath.onActivate && routePath.onActivate();
         dispatch({ data: `scene/${routePath.scene}`});
-    }
-
-    function routeToDashboard(e) {
-        console.log("route to dashboard");
-    }
-
-    function routeToHome(e) {
-        console.log("route to home");
     }
 
 
