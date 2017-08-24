@@ -1,0 +1,36 @@
+{
+  "extends": "airbnb-base",
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "globals": {
+    "__DEV__": false,
+    "__PROD__": false,
+    "__TEST__": false,
+    "__MOCK__": false,
+    "__APP_VERSION__": false,
+    "debug": false
+  },
+  "rules": {
+    // STYLE
+    // disallow dangling underscores in identifiers
+    "no-underscore-dangle": ["error", {
+      "allowAfterThis": false,
+      "allow": [
+        "__DEV__",
+        "__PROD__",
+        "__TEST__",
+        "__MOCK__",
+        "__APP_VERSION__"
+      ]
+    }],
+    "no-unused-expressions": ["error", {
+      "allowShortCircuit": true,
+      "allowTernary": true,
+      "allowTaggedTemplates": true
+    }],
+    "no-return-assign": "off",
+    "no-use-before-define": ["error", { "functions": false }]
+  }
+}
