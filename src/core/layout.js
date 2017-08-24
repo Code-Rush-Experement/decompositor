@@ -1,9 +1,10 @@
+const vdom = require('virtual-dom');
+const main = require('main-loop');
+const hyperx = require('hyperx');
+
+
 const listen = (dispatch) => {
   const layout = {};
-
-  const vdom = require('virtual-dom');
-  const main = require('main-loop');
-  const hyperx = require('hyperx');
   const hx = hyperx(vdom.h);
 
   const onMessage = (msg) => {
@@ -41,10 +42,10 @@ const listen = (dispatch) => {
   const loop = main({ sceneKey: 'default' }, render, vdom);
   document.querySelector('.scene').appendChild(loop.target);
 
-  const changeScene = (name) => {
+  function changeScene(name) {
     console.log('change scene', name);
     loop.update({ sceneKey: name });
-  };
+  }
 
   return onMessage;
 };
