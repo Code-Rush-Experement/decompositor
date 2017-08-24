@@ -1,5 +1,3 @@
-import { registry } from './registry';
-
 const listen = (dispatch) => {
 
     const layout = {};
@@ -10,24 +8,31 @@ const listen = (dispatch) => {
     const hx = hyperx(vdom.h);
 
     const onMessage = (msg) => {
-        console.log(msg);
+      console.log(msg);
+      const { data, component, componentId } = msg;
 
-        switch (msg.data) {
-            case `scene/dashboard`:
-                changeScene(`dashboard`);
-            break;
-            case `scene/login`:
-                changeScene(`login`);
-            break;
-            default:
-                changeScene(`default`);
-            break;
-        }
+      switch (data) {
+        case `scene/dashboard`:
+          changeScene(`dashboard`);
+          break;
+        case `scene/login`:
+          changeScene(`login`);
+          break;
+        case `scene/cacheComponent`:
+          cacheComponent(componentId, component);
+          break;
+        default:
+          changeScene(`default`);
+          break;
+      }
+    };
+    
+    function cacheComponent(componentId, component) {
+      layout[componentId] = component;
     }
-    ;
 
     function render (state) {
-        const cmp = registry.getComponent(state.sceneKey);
+        const cmp = layout[state.sceneKey];
         console.log('render', state);
         console.log('component', cmp);
         return cmp || hx`<span>default</span>`;
