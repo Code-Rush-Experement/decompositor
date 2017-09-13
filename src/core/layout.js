@@ -1,38 +1,32 @@
-const vdom = require('virtual-dom');
-const main = require('main-loop');
-const hyperx = require('hyperx');
-
+import { registry } from './registry';
 
 const listen = (dispatch) => {
   const layout = {};
+
+  const vdom = require('virtual-dom');
+  const main = require('main-loop');
+  const hyperx = require('hyperx');
   const hx = hyperx(vdom.h);
 
   const onMessage = (msg) => {
     console.log(msg);
-    const { data, component, componentId } = msg;
 
-    switch (data) {
+    switch (msg.data) {
       case 'scene/dashboard':
         changeScene('dashboard');
         break;
       case 'scene/login':
         changeScene('login');
         break;
-      case 'scene/cacheComponent':
-        cacheComponent(componentId, component);
-        break;
       default:
         changeScene('default');
         break;
     }
-  };
-
-  function cacheComponent(componentId, component) {
-    layout[componentId] = component;
   }
+    ;
 
   function render(state) {
-    const cmp = layout[state.sceneKey];
+    const cmp = registry.getComponent(state.sceneKey);
     console.log('render', state);
     console.log('component', cmp);
     return cmp || hx`<span>default</span>`;
@@ -42,10 +36,10 @@ const listen = (dispatch) => {
   const loop = main({ sceneKey: 'default' }, render, vdom);
   document.querySelector('.scene').appendChild(loop.target);
 
-  function changeScene(name) {
+  const changeScene = (name) => {
     console.log('change scene', name);
     loop.update({ sceneKey: name });
-  }
+  };
 
   return onMessage;
 };
